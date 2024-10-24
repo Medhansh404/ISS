@@ -8,7 +8,7 @@ const handleNewUser = async (req, res) => {
     
     try {
         // encrypt the password
-        const { user, pwd } = req.body;
+        const { user, pwd, name } = req.body;
         const hashedPwd = await bcrypt.hash(pwd, 10);
 
         // store the new user
@@ -16,7 +16,8 @@ const handleNewUser = async (req, res) => {
             data: {
                 email: user,
                 role: [2023],
-                password: hashedPwd
+                password: hashedPwd,
+                name: name
             }
         });
 

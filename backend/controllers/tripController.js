@@ -12,9 +12,8 @@ const getAllTrip = async (req, res) => {
 
 const createNewTrip = async (req, res) => {
 
-    const { src, dest, departureTime, arrivalTime, scheme, distance, fare, employeeId } = req.body.trip;
-
-    if (!src || !dest || !departureTime || !arrivalTime || !scheme || !distance || !fare || !employeeId) {
+    const { src, dest, departureTime, arrivalTime, scheme,region, distance, fare, employeeId } = req.body.trip;
+    if (!src || !dest || !departureTime || !arrivalTime || !scheme || !region || !distance || !fare || !employeeId) {
         return res.status(400).json({ 'message': 'All fields except for approvals and nDays are required.' });
     }
 
@@ -26,6 +25,7 @@ const createNewTrip = async (req, res) => {
                 departureTime,
                 arrivalTime,
                 scheme,
+                region,
                 distance: parseInt(distance),
                 fare: parseInt(fare),
                 adminApproval: false,
@@ -49,7 +49,7 @@ const updateTrip = async (req, res) => {
         });
 
         if (!trip) {
-            return res.status(400).json({ "message": `Trip ID ${id} not found` });
+            return res.status(400).json({ "message": `Trip ID ${id} not found. Please check in Tours for the trip` });
         }
 
         const updatedTrip = await prisma.Trips.update({
@@ -116,22 +116,22 @@ const getTrip = async (req, res) => {
 };
 
 const addAnotherTrip = async (req, res) => {
-    const { id } = req.params;
-
-    const { src, dest, departureTime, arrivalTime, scheme, distance, fare, employeeId } = req.body.trip;
-
-    if (!src || !dest || !departureTime || !arrivalTime || !scheme || !distance || !fare || !employeeId) {
+    const trip_id = req.params.id;
+    const { src, dest, departureTime, arrivalTime, scheme, region, distance, fare, employeeId } = req.body.trip;
+    if (!src || !dest || !departureTime || !arrivalTime || !scheme || !region || !distance || !fare || !employeeId) {
         return res.status(400).json({ 'message': 'All fields except for approvals and nDays are required.' });
     }
 
     try {
         const newTrip = await prisma.Trips.create({
             data: {
+                t_id: parseInt(trip_id),
                 src,
                 dest,
                 departureTime,
                 arrivalTime,
                 scheme,
+                region,
                 distance: parseInt(distance),
                 fare: parseInt(fare),
                 adminApproval: false,

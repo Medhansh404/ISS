@@ -6,6 +6,7 @@ CREATE TABLE "User" (
     "password" TEXT NOT NULL,
     "role" INTEGER[],
     "scheme" INTEGER[],
+    "region" INTEGER[],
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -18,7 +19,8 @@ CREATE TABLE "Trips" (
     "dest" TEXT NOT NULL,
     "departureTime" TEXT NOT NULL,
     "arrivalTime" TEXT NOT NULL,
-    "scheme" TEXT NOT NULL,
+    "scheme" INTEGER NOT NULL,
+    "region" INTEGER NOT NULL,
     "distance" DOUBLE PRECISION NOT NULL,
     "fare" INTEGER NOT NULL,
     "adminApproval" BOOLEAN NOT NULL DEFAULT false,
@@ -31,3 +33,6 @@ CREATE TABLE "Trips" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- AddForeignKey
+ALTER TABLE "Trips" ADD CONSTRAINT "Trips_employeeId_fkey" FOREIGN KEY ("employeeId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

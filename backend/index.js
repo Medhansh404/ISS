@@ -31,9 +31,10 @@ app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
 
-app.use(verifyJWT);
+//app.use(verifyJWT);
 app.use('/employees', require('./routes/api/employees'));
 app.use('/trip', require('./routes/api/trip'));
+app.use('/tour', require('./routes/api/tour'));
 
 app.all('*', (req, res) => {
     res.status(404);
