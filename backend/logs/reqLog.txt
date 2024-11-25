@@ -6884,3 +6884,5 @@
 20241024	21:11:35	ebc08c1e-a628-4d59-ba7c-e79d3b770268	POST	http://localhost:3000	/auth
 20241024	21:11:44	287fcc99-b743-4961-997a-0a8d39595ec4	GET	http://localhost:3000	/tour?empId=2
 20241024	21:11:44	e917c559-9081-4912-8a2c-bedbb27e2470	GET	http://localhost:3000	/tour?empId=2
+20241124	19:45:45	e0edec07-4b64-449c-a656-8485701b2e51	OPTIONS	http://localhost:3000	/auth
+20241124	19:45:45	2e388e8e-c625-422d-ad5b-8f3538e55f47	POST	http://localhost:3000	/auth
