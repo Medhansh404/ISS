@@ -19,14 +19,14 @@ CREATE TABLE "Trips" (
     "dest" TEXT NOT NULL,
     "departureTime" TEXT NOT NULL,
     "arrivalTime" TEXT NOT NULL,
-    "scheme" INTEGER NOT NULL,
-    "region" INTEGER NOT NULL,
     "distance" DOUBLE PRECISION NOT NULL,
     "fare" INTEGER NOT NULL,
-    "adminApproval" BOOLEAN NOT NULL DEFAULT false,
-    "supApproval" BOOLEAN NOT NULL DEFAULT false,
-    "dirApproval" BOOLEAN NOT NULL DEFAULT false,
+    "adminApproval" INTEGER NOT NULL,
+    "supApproval" INTEGER NOT NULL,
+    "dirApproval" INTEGER NOT NULL,
     "employeeId" INTEGER NOT NULL,
+    "scheme" INTEGER[],
+    "region" INTEGER[],
 
     CONSTRAINT "Trips_pkey" PRIMARY KEY ("id")
 );

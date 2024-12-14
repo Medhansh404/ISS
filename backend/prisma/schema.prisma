@@ -19,19 +19,19 @@ model User {
 }
 
 model Trips {
-  id            Int     @id @default(autoincrement())
-  t_id          Int     @default(autoincrement())
+  id            Int    @id @default(autoincrement())
+  t_id          Int    @default(autoincrement())
   src           String
   dest          String
   departureTime String
   arrivalTime   String
-  scheme        String
-  region        String
   distance      Float
   fare          Int
-  adminApproval Boolean @default(false)
-  supApproval   Boolean @default(false)
-  dirApproval   Boolean @default(false)
+  adminApproval Int
+  supApproval   Int
+  dirApproval   Int
   employeeId    Int
-  user          User    @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  scheme        Int[]
+  region        Int[]
+  user          User   @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 }

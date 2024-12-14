@@ -35,6 +35,9 @@ app.use('/refresh', require('./routes/refresh'));
 app.use('/employees', require('./routes/api/employees'));
 app.use('/trip', require('./routes/api/trip'));
 app.use('/tour', require('./routes/api/tour'));
+app.use('/status', require('./routes/api/status'))
+app.use('/requests', require('./routes/api/requests'))
+app.use('/download', require('./routes/download'))
 
 app.all('*', (req, res) => {
     res.status(404);

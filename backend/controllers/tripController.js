@@ -28,9 +28,9 @@ const createNewTrip = async (req, res) => {
                 region,
                 distance: parseInt(distance),
                 fare: parseInt(fare),
-                adminApproval: false,
-                supApproval: false,
-                dirApproval: false,
+                adminApproval: -1,
+                supApproval: -1,
+                dirApproval: -1,
                 employeeId
             }
         });
@@ -99,7 +99,6 @@ const deleteTrip = async (req, res) => {
 
 const getTrip = async (req, res) => {
     const { id } = req.params.emp_id;
-    console.log(id)
     try {
         const trip = await prisma.Trips.findUnique({
             where: { employeeId: parseInt(id) }
@@ -134,9 +133,9 @@ const addAnotherTrip = async (req, res) => {
                 region,
                 distance: parseInt(distance),
                 fare: parseInt(fare),
-                adminApproval: false,
-                supApproval: false,
-                dirApproval: false,
+                adminApproval: -1,
+                supApproval: -1,
+                dirApproval: -1,
                 employeeId
             }
         });
