@@ -7,17 +7,17 @@ const TripApproval = () => {
   const [selectedTrips, setSelectedTrips] = useState([]);
   const [error, setError] = useState("");
   const { auth } = useAuth();
-  const id = auth.id || {};
+  const email = auth.email || {};
   
   // Fetch trips from backend
   useEffect(() => {
     const fetchTrips = async () => {
       try {
-        const response = await axios.get("/status", {
-          params: { id: id },
+        const response = await axios.get("/requests", {
+          params: { email: email },
         });
         if (response.data.length === 0) {
-          setError("No requests are due for approval, Make new trip request.");
+          setError("No requests are due for approval.");
         } else {
           setTrips(response.data);
         }
@@ -50,19 +50,19 @@ const TripApproval = () => {
     try {
       const tripUpdates = selectedTrips.map((id) => ({
         id,
-        adminStatus: -1,
-        dirStatus: -1,
-        supStatus: -1,
+        adminStatus: true,
+        dirStatus: true,
+        supStatus: true,
       }));
 
-      await axios.put("/status", { trips: tripUpdates });
+      await axios.put("/requests", { trips: tripUpdates });
 
       console.log("Trips approved successfully!");
       setSelectedTrips([]); // Clear selection after approval
 
       // Refresh trips list
-      const response = await axios.get("/status", {
-        params: { id: id },
+      const response = await axios.get("/request", {
+        params: { email: email },
       });
 
       if (response.data.length === 0) {
