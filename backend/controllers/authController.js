@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const handleLogin = async (req, res) => {
     const { email, pwd } = req.body;
+    console.log(req.body);
     if (!email || !pwd) return res.status(400).json({ 'message': 'Username and password are required.' });
     const foundUser = await prisma.User.findUnique({
         where: {
